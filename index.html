@@ -7,168 +7,168 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-user-select: none;
--webkit-user-select: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 body {
-background-color: #e2f5ec; /* 연한 사이다 배경색 */
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-font-family: 'Jua', sans-serif;
-overflow: hidden;
+    background-color: #e2f5ec; /* 연한 사이다 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Jua', sans-serif;
+    overflow: hidden;
 }
 
 #game-wrapper {
-position: relative;
-width: 100%;
-max-width: 400px; /* 모바일 앱 세로 비율 시뮬레이션 */
-height: 100vh;
-max-height: 700px;
-background: linear-gradient(180deg, #c4f0da 0%, #ffffff 100%);
-box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-border-radius: 20px;
-overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* 모바일 앱 세로 비율 시뮬레이션 */
+    height: 100vh;
+    max-height: 700px;
+    background: linear-gradient(180deg, #c4f0da 0%, #ffffff 100%);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-/* 캔버스 /
+/* 캔버스 */
 #game-canvas {
-display: block;
-width: 100%;
-height: 100%;
-touch-action: none; / 모바일 스크롤 방지 */
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none; /* 모바일 스크롤 방지 */
 }
 
 /* 공통 오버레이 스타일 */
 .overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(255, 255, 255, 0.85);
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-z-index: 10;
-padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
 }
 
 .hidden {
-display: none !important;
+    display: none !important;
 }
 
 /* 타이틀 화면 */
 .brand-logo {
-font-size: 24px;
-color: #00A651;
-margin-bottom: 10px;
-letter-spacing: -1px;
+    font-size: 24px;
+    color: #00A651;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
 }
 .brand-logo span { font-size: 14px; color: #555; }
 
 .game-title {
-font-size: 42px;
-color: #333;
-line-height: 1.2;
-margin-bottom: 30px;
-text-shadow: 2px 2px 0px #fff, 4px 4px 0px #c4f0da;
+    font-size: 42px;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px #c4f0da;
 }
 
 .btn {
-background-color: #00A651; /* 사이다뱅크 메인 컬러 */
-color: white;
-border: none;
-padding: 15px 40px;
-font-size: 24px;
-border-radius: 50px;
-cursor: pointer;
-font-family: 'Jua', sans-serif;
-box-shadow: 0 5px 15px rgba(0, 166, 81, 0.4);
-transition: transform 0.1s;
+    background-color: #00A651; /* 사이다뱅크 메인 컬러 */
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Jua', sans-serif;
+    box-shadow: 0 5px 15px rgba(0, 166, 81, 0.4);
+    transition: transform 0.1s;
 }
 .btn:active { transform: scale(0.95); }
 
 .reward-info {
-margin-top: 30px;
-background: #fff;
-padding: 15px;
-border-radius: 15px;
-border: 2px dashed #00A651;
-font-size: 16px;
-color: #444;
+    margin-top: 30px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px dashed #00A651;
+    font-size: 16px;
+    color: #444;
 }
 .reward-info h3 { color: #00A651; margin-bottom: 5px; }
 
 /* 인게임 HUD */
 #hud {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-padding: 15px;
-pointer-events: none;
-display: flex;
-justify-content: space-between;
-z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    z-index: 5;
 }
 
 .score-board {
-display: flex;
-flex-direction: column;
-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .score-item {
-background: rgba(255,255,255,0.9);
-padding: 5px 10px;
-border-radius: 20px;
-font-size: 16px;
-display: flex;
-align-items: center;
-gap: 8px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.9);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .score-color {
-width: 12px; height: 12px; border-radius: 50%;
+    width: 12px; height: 12px; border-radius: 50%;
 }
 
 #timer-display {
-background: #00A651;
-color: white;
-padding: 5px 15px;
-border-radius: 20px;
-font-size: 24px;
-height: fit-content;
-box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background: #00A651;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 24px;
+    height: fit-content;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 /* 게임 오버 화면 */
 .rank-list {
-width: 100%;
-margin: 20px 0;
-display: flex;
-flex-direction: column;
-gap: 10px;
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .rank-item {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: white;
-padding: 15px;
-border-radius: 15px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-border-left: 5px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-left: 5px solid #ccc;
 }
 .rank-item.is-player { border-left-color: #00A651; background: #eafff3; }
 
@@ -177,79 +177,71 @@ border-left: 5px solid #ccc;
 .rank-score { font-weight: bold; color: #00A651; font-size: 18px;}
 
 .reward-box {
-background: #fff4d2;
-color: #d97706;
-padding: 15px;
-border-radius: 10px;
-margin-bottom: 20px;
-font-size: 18px;
-animation: pop 0.5s ease-out;
+    background: #fff4d2;
+    color: #d97706;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    animation: pop 0.5s ease-out;
 }
 
 @keyframes pop {
-0% { transform: scale(0.8); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 #booster-alert {
-position: absolute;
-top: 50%; left: 50%;
-transform: translate(-50%, -50%);
-color: #f59e0b;
-font-size: 32px;
-text-shadow: 2px 2px white;
-pointer-events: none;
-transition: opacity 0.5s;
-z-index: 6;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f59e0b;
+    font-size: 32px;
+    text-shadow: 2px 2px white;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    z-index: 6;
 }
-
 </style>
 </head>
 <body>
 
 <div id="game-wrapper">
-<!-- 인게임 캔버스 -->
-<canvas id="game-canvas"></canvas>
+    <canvas id="game-canvas"></canvas>
 
-<!-- 인게임 UI (타이머 및 점수) -->
-<div id="hud" class="hidden">
-<div class="score-board" id="score-board">
-<!-- JS에서 생성됨 -->
-</div>
-<div id="timer-display">30</div>
-</div>
+    <div id="hud" class="hidden">
+        <div class="score-board" id="score-board">
+            </div>
+        <div id="timer-display">30</div>
+    </div>
 
-<div id="booster-alert" class="hidden">복리 부스터 발동! (2배)</div>
+    <div id="booster-alert" class="hidden">복리 부스터 발동! (2배)</div>
 
-<!-- 시작 화면 -->
-<div id="start-screen" class="overlay">
-<div class="brand-logo">사이다뱅크 <span>by SBI저축은행</span></div>
-<div class="game-title">사이다 톡톡!<br>코인 쟁탈전</div>
-<p style="margin-bottom: 20px; color: #666; font-size: 18px;">
-화면을 드래그하여 이동하세요.<br>다른 유저(AI)보다 코인을 많이 모으세요!
-</p>
-<button class="btn" id="start-btn">게임 시작하기</button>
+    <div id="start-screen" class="overlay">
+        <div class="brand-logo">사이다뱅크 <span>by SBI저축은행</span></div>
+        <div class="game-title">사이다 톡톡!<br>코인 쟁탈전</div>
+        <p style="margin-bottom: 20px; color: #666; font-size: 18px;">
+            화면을 드래그하여 이동하세요.<br>다른 유저(AI)보다 코인을 많이 모으세요!
+        </p>
+        <button class="btn" id="start-btn">게임 시작하기</button>
 
-<div class="reward-info">
-<h3>🎁 이번 주 랭킹 보상</h3>
-<p>1위: 예금 금리 0.5%p 우대 쿠폰</p>
-<p>2위: 스타벅스 아이스 아메리카노</p>
-<p>3위: GS25 2천원 모바일 상품권</p>
-<p>4위: 사이다 포인트 100P</p>
-</div>
-</div>
+        <div class="reward-info">
+            <h3>🎁 이번 주 랭킹 보상</h3>
+            <p>1위: 예금 금리 0.5%p 우대 쿠폰</p>
+            <p>2위: 스타벅스 아이스 아메리카노</p>
+            <p>3위: GS25 2천원 모바일 상품권</p>
+            <p>4위: 사이다 포인트 100P</p>
+        </div>
+    </div>
 
-<!-- 종료 및 보상 화면 -->
-<div id="end-screen" class="overlay hidden">
-<h2 style="font-size: 36px; color: #00A651; margin-bottom: 10px;">게임 종료!</h2>
-<div id="player-reward" class="reward-box">
-<!-- 보상 내용 렌더링 -->
-</div>
-<div class="rank-list" id="rank-list">
-<!-- 랭킹 렌더링 -->
-</div>
-<button class="btn" id="restart-btn" style="margin-top: 10px;">다시 도전하기</button>
-</div>
+    <div id="end-screen" class="overlay hidden">
+        <h2 style="font-size: 36px; color: #00A651; margin-bottom: 10px;">게임 종료!</h2>
+        <div id="player-reward" class="reward-box">
+            </div>
+        <div class="rank-list" id="rank-list">
+            </div>
+        <button class="btn" id="restart-btn" style="margin-top: 10px;">다시 도전하기</button>
+    </div>
 </div>
 
 <script>
@@ -283,33 +275,33 @@ let bubbles = [];
 
 // 주간 보상 데이터
 const rewards = [
-"🎉 1위 달성! [0.5%p 금리 우대 쿠폰] 획득!",
-"☕ 2위 달성! [스타벅스 아메리카노] 획득!",
-"🏪 3위 달성! [편의점 2천원권] 획득!",
-"🌱 4위 달성! [사이다 포인트 100P] 획득!"
+    "🎉 1위 달성! [0.5%p 금리 우대 쿠폰] 획득!",
+    "☕ 2위 달성! [스타벅스 아메리카노] 획득!",
+    "🏪 3위 달성! [편의점 2천원권] 획득!",
+    "🌱 4위 달성! [사이다 포인트 100P] 획득!"
 ];
 
 // --- 캔버스 리사이즈 처리 ---
 function resizeCanvas() {
-width = canvas.parentElement.clientWidth;
-height = canvas.parentElement.clientHeight;
-canvas.width = width;
-canvas.height = height;
+    width = canvas.parentElement.clientWidth;
+    height = canvas.parentElement.clientHeight;
+    canvas.width = width;
+    canvas.height = height;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 // --- 입력 처리 ---
 function updateTarget(e) {
-if(!isPlaying) return;
-const rect = canvas.getBoundingClientRect();
-if (e.touches && e.touches.length > 0) {
-targetX = e.touches[0].clientX - rect.left;
-targetY = e.touches[0].clientY - rect.left;
-} else {
-targetX = e.clientX - rect.left;
-targetY = e.clientY - rect.top;
-}
+    if(!isPlaying) return;
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches && e.touches.length > 0) {
+        targetX = e.touches[0].clientX - rect.left;
+        targetY = e.touches[0].clientY - rect.top; // 오타 수정 (left -> top)
+    } else {
+        targetX = e.clientX - rect.left;
+        targetY = e.clientY - rect.top;
+    }
 }
 canvas.addEventListener('mousemove', updateTarget);
 canvas.addEventListener('touchmove', updateTarget, {passive: false});
@@ -317,351 +309,360 @@ canvas.addEventListener('touchstart', updateTarget, {passive: false});
 
 // --- 클래스 정의 ---
 class Character {
-constructor(id, name, color, isPlayer, x, y) {
-this.id = id;
-this.name = name;
-this.color = color;
-this.isPlayer = isPlayer;
-this.x = x;
-this.y = y;
-this.radius = 18;
-this.speed = isPlayer ? 4 : 2.5 + Math.random() * 1; // 플레이어가 약간 더 빠름
-this.score = 0;
-this.multiplier = 1;
-this.boosterTime = 0;
-}
+    constructor(id, name, color, isPlayer, x, y) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.isPlayer = isPlayer;
+        this.x = x;
+        this.y = y;
+        this.radius = 18;
+        this.speed = isPlayer ? 4 : 2.5 + Math.random() * 1; // 플레이어가 약간 더 빠름
+        this.score = 0;
+        this.multiplier = 1;
+        this.boosterTime = 0;
+    }
 
-update() {
-if (this.isPlayer) {
-// 플레이어 이동 (터치/마우스 타겟 향해 부드럽게 이동)
-const dx = targetX - this.x;
-const dy = targetY - this.y;
-const dist = Math.sqrt(dx * dx + dy * dy);
-if (dist > this.speed) {
-this.x += (dx / dist) * this.speed;
-this.y += (dy / dist) * this.speed;
-}
-} else {
-// AI 로직: 가장 가까운 코인 찾아서 이동
-let closestCoin = null;
-let minDist = Infinity;
-for (let c of coins) {
-const d = Math.hypot(c.x - this.x, c.y - this.y);
-if (d < minDist) { minDist = d; closestCoin = c; }
-}
+    update() {
+        if (this.isPlayer) {
+            // 플레이어 이동 (터치/마우스 타겟 향해 부드럽게 이동)
+            const dx = targetX - this.x;
+            const dy = targetY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > this.speed) {
+                this.x += (dx / dist) * this.speed;
+                this.y += (dy / dist) * this.speed;
+            }
+        } else {
+            // AI 로직: 가장 가까운 코인 찾아서 이동
+            let closestCoin = null;
+            let minDist = Infinity;
+            for (let c of coins) {
+                const d = Math.hypot(c.x - this.x, c.y - this.y);
+                if (d < minDist) { minDist = d; closestCoin = c; }
+            }
 
-if (closestCoin) {
-const dx = closestCoin.x - this.x;
-const dy = closestCoin.y - this.y;
-const dist = Math.sqrt(dx * dx + dy * dy);
-if (dist > 0) {
-this.x += (dx / dist) * this.speed;
-this.y += (dy / dist) * this.speed;
-}
-}
-}
+            if (closestCoin) {
+                const dx = closestCoin.x - this.x;
+                const dy = closestCoin.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist > 0) {
+                    this.x += (dx / dist) * this.speed;
+                    this.y += (dy / dist) * this.speed;
+                }
+            }
+        }
 
-// 부스터 시간 감소
-if(this.boosterTime > 0) {
-this.boosterTime -= 1000/60; // 약 60fps 기준
-if(this.boosterTime <= 0) {
-this.multiplier = 1;
-if(this.isPlayer) boosterAlert.classList.add('hidden');
-}
-}
+        // 부스터 시간 감소
+        if(this.boosterTime > 0) {
+            this.boosterTime -= 1000/60; // 약 60fps 기준
+            if(this.boosterTime <= 0) {
+                this.multiplier = 1;
+                if(this.isPlayer) boosterAlert.classList.add('hidden');
+            }
+        }
 
-// 화면 이탈 방지
-this.x = Math.max(this.radius, Math.min(width - this.radius, this.x));
-this.y = Math.max(this.radius, Math.min(height - this.radius, this.y));
-}
+        // 화면 이탈 방지
+        this.x = Math.max(this.radius, Math.min(width - this.radius, this.x));
+        this.y = Math.max(this.radius, Math.min(height - this.radius, this.y));
+    }
 
-draw() {
-// 부스터 효과 (아우라)
-if (this.multiplier > 1) {
-ctx.beginPath();
-ctx.arc(this.x, this.y, this.radius + 5 + Math.sin(Date.now()/100)3, 0, Math.PI2);
-ctx.fillStyle = "rgba(255, 215, 0, 0.5)";
-ctx.fill();
-}
+    draw() {
+        // 부스터 효과 (아우라) - 문법 오류 수정 (* 기호 추가)
+        if (this.multiplier > 1) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius + 5 + Math.sin(Date.now()/100) * 3, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 215, 0, 0.5)";
+            ctx.fill();
+        }
 
-// 몸통
-ctx.beginPath();
-ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-ctx.fillStyle = this.color;
-ctx.fill();
-ctx.lineWidth = 2;
-ctx.strokeStyle = "rgba(0,0,0,0.2)";
-ctx.stroke();
+        // 몸통
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(0,0,0,0.2)";
+        ctx.stroke();
 
-// 귀여운 눈
-ctx.fillStyle = "white";
-ctx.beginPath(); ctx.arc(this.x - 6, this.y - 3, 5, 0, Math.PI * 2); ctx.fill();
-ctx.beginPath(); ctx.arc(this.x + 6, this.y - 3, 5, 0, Math.PI * 2); ctx.fill();
+        // 귀여운 눈
+        ctx.fillStyle = "white";
+        ctx.beginPath(); ctx.arc(this.x - 6, this.y - 3, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x + 6, this.y - 3, 5, 0, Math.PI * 2); ctx.fill();
 
-ctx.fillStyle = "black";
-ctx.beginPath(); ctx.arc(this.x - 6, this.y - 3, 2, 0, Math.PI * 2); ctx.fill();
-ctx.beginPath(); ctx.arc(this.x + 6, this.y - 3, 2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "black";
+        ctx.beginPath(); ctx.arc(this.x - 6, this.y - 3, 2, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x + 6, this.y - 3, 2, 0, Math.PI * 2); ctx.fill();
 
-// 이름 태그 (플레이어만 굵게)
-ctx.fillStyle = "#333";
-ctx.font = this.isPlayer ? "bold 12px Jua" : "12px Jua";
-ctx.textAlign = "center";
-ctx.fillText(this.name, this.x, this.y - this.radius - 8);
-}
+        // 이름 태그 (플레이어만 굵게)
+        ctx.fillStyle = "#333";
+        ctx.font = this.isPlayer ? "bold 12px Jua" : "12px Jua";
+        ctx.textAlign = "center";
+        ctx.fillText(this.name, this.x, this.y - this.radius - 8);
+    }
 }
 
 class Coin {
-constructor() {
-this.radius = 12;
-this.x = this.radius + Math.random() * (width - this.radius * 2);
-this.y = this.radius + Math.random() * (height - this.radius * 2);
-// 10% 확률로 복리 부스터 생성
-this.isBooster = Math.random() < 0.1;
-this.bobOffset = Math.random() * Math.PI * 2;
-}
+    constructor() {
+        this.radius = 12;
+        this.x = this.radius + Math.random() * (width - this.radius * 2);
+        this.y = this.radius + Math.random() * (height - this.radius * 2);
+        // 10% 확률로 복리 부스터 생성
+        this.isBooster = Math.random() < 0.1;
+        this.bobOffset = Math.random() * Math.PI * 2;
+    }
 
-draw() {
-const yOffset = Math.sin((Date.now() / 200) + this.bobOffset) * 3;
+    draw() {
+        const yOffset = Math.sin((Date.now() / 200) + this.bobOffset) * 3;
 
-ctx.beginPath();
-ctx.arc(this.x, this.y + yOffset, this.radius, 0, Math.PI * 2);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y + yOffset, this.radius, 0, Math.PI * 2);
 
-if (this.isBooster) {
-// 부스터: 무지개/별 느낌
-const gradient = ctx.createRadialGradient(this.x, this.y+yOffset, 0, this.x, this.y+yOffset, this.radius);
-gradient.addColorStop(0, "#fff");
-gradient.addColorStop(1, "#f59e0b");
-ctx.fillStyle = gradient;
-} else {
-// 일반 코인: 금색
-ctx.fillStyle = "#fbbf24";
-}
-ctx.fill();
-ctx.strokeStyle = "#b45309";
-ctx.lineWidth = 2;
-ctx.stroke();
+        if (this.isBooster) {
+            // 부스터: 무지개/별 느낌
+            const gradient = ctx.createRadialGradient(this.x, this.y+yOffset, 0, this.x, this.y+yOffset, this.radius);
+            gradient.addColorStop(0, "#fff");
+            gradient.addColorStop(1, "#f59e0b");
+            ctx.fillStyle = gradient;
+        } else {
+            // 일반 코인: 금색
+            ctx.fillStyle = "#fbbf24";
+        }
+        ctx.fill();
+        ctx.strokeStyle = "#b45309";
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
-// 코인 문양
-ctx.fillStyle = "#b45309";
-ctx.font = "bold 14px Jua";
-ctx.textAlign = "center";
-ctx.textBaseline = "middle";
-ctx.fillText(this.isBooster ? "B" : "₩", this.x, this.y + yOffset);
-}
+        // 코인 문양
+        ctx.fillStyle = "#b45309";
+        ctx.font = "bold 14px Jua";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(this.isBooster ? "B" : "₩", this.x, this.y + yOffset);
+    }
 }
 
 class Particle {
-constructor(x, y, color) {
-this.x = x; this.y = y;
-this.color = color;
-this.size = Math.random() * 4 + 2;
-this.speedX = Math.random() * 4 - 2;
-this.speedY = Math.random() * 4 - 2;
-this.life = 1.0;
-}
-update() {
-this.x += this.speedX; this.y += this.speedY;
-this.life -= 0.05;
-}
-draw() {
-ctx.globalAlpha = Math.max(0, this.life);
-ctx.fillStyle = this.color;
-ctx.beginPath();
-ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-ctx.fill();
-ctx.globalAlpha = 1.0;
-}
+    constructor(x, y, color) {
+        this.x = x; this.y = y;
+        this.color = color;
+        this.size = Math.random() * 4 + 2;
+        this.speedX = Math.random() * 4 - 2;
+        this.speedY = Math.random() * 4 - 2;
+        this.life = 1.0;
+    }
+    update() {
+        this.x += this.speedX; this.y += this.speedY;
+        this.life -= 0.05;
+    }
+    draw() {
+        ctx.globalAlpha = Math.max(0, this.life);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
 }
 
 // 배경용 사이다 기포
 class Bubble {
-constructor() {
-this.x = Math.random() * width;
-this.y = height + Math.random() * 100;
-this.size = Math.random() * 6 + 2;
-this.speed = Math.random() * 2 + 1;
-}
-update() {
-this.y -= this.speed;
-if (this.y < -10) {
-this.y = height + 10;
-this.x = Math.random() * width;
-}
-}
-draw() {
-ctx.beginPath();
-ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-ctx.fill();
-}
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 100;
+        this.size = Math.random() * 6 + 2;
+        this.speed = Math.random() * 2 + 1;
+    }
+    update() {
+        this.y -= this.speed;
+        if (this.y < -10) {
+            this.y = height + 10;
+            this.x = Math.random() * width;
+        }
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.fill();
+    }
 }
 
 // --- 게임 핵심 로직 ---
 
 function createExplosion(x, y, color) {
-for(let i=0; i<8; i++) {
-particles.push(new Particle(x, y, color));
-}
+    for(let i=0; i<8; i++) {
+        particles.push(new Particle(x, y, color));
+    }
 }
 
 function initGame() {
-players = [
-new Character('p1', '나(사이다)', '#00A651', true, width/2, height/2),
-new Character('b1', '김고객', '#FF6B6B', false, 50, 50),
-new Character('b2', '이저축', '#4ECDC4', false, width-50, 50),
-new Character('b3', '박투자', '#9D50BB', false, width/2, height-50)
- ];
+    players = [
+        new Character('p1', '나(사이다)', '#00A651', true, width/2, height/2),
+        new Character('b1', '김고객', '#FF6B6B', false, 50, 50),
+        new Character('b2', '이저축', '#4ECDC4', false, width-50, 50),
+        new Character('b3', '박투자', '#9D50BB', false, width/2, height-50)
+    ];
 
-targetX = width/2;
-targetY = height/2;
+    targetX = width/2;
+    targetY = height/2;
 
-coins = [];
-particles = [];
-bubbles = [];
-for(let i=0; i<15; i++) bubbles.push(new Bubble());
-for(let i=0; i<8; i++) coins.push(new Coin()); // 시작 시 코인 8개
+    coins = [];
+    particles = [];
+    bubbles = [];
+    for(let i=0; i<15; i++) bubbles.push(new Bubble());
+    for(let i=0; i<8; i++) coins.push(new Coin()); // 시작 시 코인 8개
 
-gameTime = 30; // 초 단위
-timerDisplay.innerText = gameTime;
-updateScoreBoard();
-boosterAlert.classList.add('hidden');
+    gameTime = 30; // 초 단위
+    timerDisplay.innerText = gameTime;
+    updateScoreBoard();
+    boosterAlert.classList.add('hidden');
 }
 
 function updateScoreBoard() {
-scoreBoard.innerHTML = '';
-// 점수 순으로 정렬하여 표시
-let sortedPlayers = [...players].sort((a,b) => b.score - a.score);
-sortedPlayers.forEach(p => {
-const isMe = p.isPlayer ? "font-weight:bold; border: 2px solid #00A651;" : "";
-scoreBoard.innerHTML += &lt;div class="score-item" style="${isMe}">
-<div class="score-color" style="background:${p.color}"&gt;&lt;/div&gt; &lt;span&gt;${p.name}: <strong>${p.score}&lt;/strong&gt;&lt;/span&gt; &lt;/div&gt;;
-});
+    scoreBoard.innerHTML = '';
+    // 점수 순으로 정렬하여 표시
+    let sortedPlayers = [...players].sort((a,b) => b.score - a.score);
+    sortedPlayers.forEach(p => {
+        const isMe = p.isPlayer ? "font-weight:bold; border: 2px solid #00A651;" : "";
+        // 문자열 이스케이프 오류 수정
+        scoreBoard.innerHTML += `
+            <div class="score-item" style="${isMe}">
+                <div class="score-color" style="background:${p.color}"></div>
+                <span>${p.name}: <strong>${p.score}</strong></span>
+            </div>`;
+    });
 }
 
 function showEndScreen() {
-isPlaying = false;
-cancelAnimationFrame(gameLoop);
-clearInterval(timerInterval);
+    isPlaying = false;
+    cancelAnimationFrame(gameLoop);
+    clearInterval(timerInterval);
 
-hud.classList.add('hidden');
-endScreen.classList.remove('hidden');
+    hud.classList.add('hidden');
+    endScreen.classList.remove('hidden');
 
-// 최종 랭킹 계산
-let sortedPlayers = [...players].sort((a,b) => b.score - a.score);
-rankList.innerHTML = '';
+    // 최종 랭킹 계산
+    let sortedPlayers = [...players].sort((a,b) => b.score - a.score);
+    rankList.innerHTML = '';
 
-let playerRank = 0;
+    let playerRank = 0;
 
-sortedPlayers.forEach((p, index) => {
-if (p.isPlayer) playerRank = index;
+    sortedPlayers.forEach((p, index) => {
+        if (p.isPlayer) playerRank = index;
 
-let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "🎀";
-let meClass = p.isPlayer ? "is-player" : "";
-let nameTag = p.isPlayer ? "나(사이다)" : p.name;
+        let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "🎀";
+        let meClass = p.isPlayer ? "is-player" : "";
+        let nameTag = p.isPlayer ? "나(사이다)" : p.name;
 
-rankList.innerHTML += &lt;div class="rank-item ${meClass}">
-<div class="rank-medal">${medal}&lt;/div&gt; &lt;div class="rank-name"&gt;${nameTag}</div>
-<div class="rank-score">${p.score} 💰&lt;/div&gt; &lt;/div&gt;;
-});
+        // 문자열 이스케이프 오류 수정
+        rankList.innerHTML += `
+            <div class="rank-item ${meClass}">
+                <div class="rank-medal">${medal}</div>
+                <div class="rank-name">${nameTag}</div>
+                <div class="rank-score">${p.score} 💰</div>
+            </div>`;
+    });
 
-// 리워드 세팅
-playerReward.innerText = rewards[playerRank];
+    // 리워드 세팅
+    playerReward.innerText = rewards[playerRank];
 }
 
 function update() {
-if (!isPlaying) return;
+    if (!isPlaying) return;
 
-// 배경 기포 업데이트
-bubbles.forEach(b => b.update());
+    // 배경 기포 업데이트
+    bubbles.forEach(b => b.update());
 
-// 코인 유지 보수 (항상 7~9개 유지)
-if(coins.length < 7 && Math.random() < 0.05) {
-coins.push(new Coin());
-}
+    // 코인 유지 보수 (항상 7~9개 유지)
+    if(coins.length < 7 && Math.random() < 0.05) {
+        coins.push(new Coin());
+    }
 
-// 플레이어/봇 로직 및 충돌 체크
-players.forEach(p => {
-p.update();
+    // 플레이어/봇 로직 및 충돌 체크
+    players.forEach(p => {
+        p.update();
 
-// 코인 획득 체크
-for (let i = coins.length - 1; i >= 0; i--) {
-const c = coins[i];
-const dist = Math.hypot(p.x - c.x, p.y - c.y);
+        // 코인 획득 체크
+        for (let i = coins.length - 1; i >= 0; i--) {
+            const c = coins[i];
+            const dist = Math.hypot(p.x - c.x, p.y - c.y);
 
-if (dist < p.radius + c.radius) {
-if (c.isBooster) {
-p.multiplier = 2; // 복리 부스터
-p.boosterTime = 5000; // 5초
-createExplosion(c.x, c.y, '#f59e0b');
-if (p.isPlayer) {
-boosterAlert.classList.remove('hidden');
-}
-} else {
-p.score += (10 * p.multiplier);
-createExplosion(c.x, c.y, '#fbbf24');
-}
-coins.splice(i, 1);
-coins.push(new Coin()); // 바로 새 코인 스폰
-updateScoreBoard();
-}
-}
-});
+            if (dist < p.radius + c.radius) {
+                if (c.isBooster) {
+                    p.multiplier = 2; // 복리 부스터
+                    p.boosterTime = 5000; // 5초
+                    p.score += (10 * p.multiplier); // 부스터 코인 자체도 획득 점수 추가되도록 수정
+                    createExplosion(c.x, c.y, '#f59e0b');
+                    if (p.isPlayer) {
+                        boosterAlert.classList.remove('hidden');
+                    }
+                } else {
+                    p.score += (10 * p.multiplier);
+                    createExplosion(c.x, c.y, '#fbbf24');
+                }
+                coins.splice(i, 1);
+                coins.push(new Coin()); // 바로 새 코인 스폰
+                updateScoreBoard();
+            }
+        }
+    });
 
-// 파티클 업데이트
-for (let i = particles.length - 1; i >= 0; i--) {
-particles[i].update();
-if (particles[i].life <= 0) particles.splice(i, 1);
-}
+    // 파티클 업데이트
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        if (particles[i].life <= 0) particles.splice(i, 1);
+    }
 }
 
 function draw() {
-// 배경 클리어
-ctx.clearRect(0, 0, width, height);
+    // 배경 클리어
+    ctx.clearRect(0, 0, width, height);
 
-// 기포 그리기
-bubbles.forEach(b => b.draw());
+    // 기포 그리기
+    bubbles.forEach(b => b.draw());
 
-// 코인 그리기
-coins.forEach(c => c.draw());
+    // 코인 그리기
+    coins.forEach(c => c.draw());
 
-// 캐릭터 그리기
-players.forEach(p => p.draw());
+    // 캐릭터 그리기
+    players.forEach(p => p.draw());
 
-// 파티클 그리기
-particles.forEach(p => p.draw());
+    // 파티클 그리기
+    particles.forEach(p => p.draw());
 
-if (isPlaying) {
-gameLoop = requestAnimationFrame(() => {
-update();
-draw();
-});
-}
+    if (isPlaying) {
+        gameLoop = requestAnimationFrame(() => {
+            update();
+            draw();
+        });
+    }
 }
 
 function startGame() {
-startScreen.classList.add('hidden');
-endScreen.classList.add('hidden');
-hud.classList.remove('hidden');
+    startScreen.classList.add('hidden');
+    endScreen.classList.add('hidden');
+    hud.classList.remove('hidden');
 
-initGame();
-isPlaying = true;
+    initGame();
+    isPlaying = true;
 
-// 타이머 시작
-timerInterval = setInterval(() => {
-gameTime--;
-timerDisplay.innerText = gameTime;
+    // 타이머 시작
+    timerInterval = setInterval(() => {
+        gameTime--;
+        timerDisplay.innerText = gameTime;
 
-if(gameTime <= 10) timerDisplay.style.background = "#e11d48"; // 10초 남으면 빨간색
-else timerDisplay.style.background = "#00A651";
+        if(gameTime <= 10) timerDisplay.style.background = "#e11d48"; // 10초 남으면 빨간색
+        else timerDisplay.style.background = "#00A651";
 
-if (gameTime <= 0) {
-showEndScreen();
-}
-}, 1000);
+        if (gameTime <= 0) {
+            showEndScreen();
+        }
+    }, 1000);
 
-// 게임 루프 시작
-update();
-draw();
+    // 게임 루프 시작
+    update();
+    draw();
 }
 
 // --- 이벤트 리스너 ---
@@ -672,12 +673,11 @@ document.getElementById('restart-btn').addEventListener('click', startGame);
 resizeCanvas();
 for(let i=0; i<15; i++) bubbles.push(new Bubble());
 setInterval(() => {
-if(!isPlaying) {
-ctx.clearRect(0, 0, width, height);
-bubbles.forEach(b => { b.update(); b.draw(); });
-}
+    if(!isPlaying) {
+        ctx.clearRect(0, 0, width, height);
+        bubbles.forEach(b => { b.update(); b.draw(); });
+    }
 }, 30);
-
 </script>
 </body>
 </html>
